@@ -6,4 +6,6 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "Weather API is running"}
+    return {"message": "Weather API is now running"}
+
+
