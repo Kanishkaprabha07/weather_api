@@ -15,17 +15,18 @@ class WeatherReport:
             print("from cache")
             return WeatherResponse(**json.loads(cached_data))
         url = self.base_url +"?q=" +city+ "&appid=" + OPENWEATHER_API_KEY
-        response = requests.get(url).json()
+        response = requests.get(url)
+        result=response.json()
         print (response)
         
-        if response.get("cod") != 200:
+        if result.get("cod") != 200:
             raise ValueError
         data ={
         "city":city,
         "date":str(date),
-        "temperature":response["main"]["temp"],
-        "humidity":response["main"]["humidity"],
-        "wind_speed":response["wind"]["speed"]
+        "temperature":result["main"]["temp"],
+        "humidity":result["main"]["humidity"],
+        "wind_speed":result["wind"]["speed"]
         }
   
         redis_client.setex(cache_key, 3600, json.dumps(data))  
