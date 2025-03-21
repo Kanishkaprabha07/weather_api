@@ -3,3 +3,6 @@ uvicorn
 redis
 python-dotenv
 requests
+alembic
+sqlalchemy
+psycopg2-binary
